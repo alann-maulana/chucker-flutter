@@ -1,6 +1,5 @@
 import 'package:chucker_flutter/src/helpers/extensions.dart';
 import 'package:chucker_flutter/src/helpers/shared_preferences_manager.dart';
-import 'package:chucker_flutter/src/localization/localization.dart';
 
 import 'package:chucker_flutter/src/models/settings.dart';
 import 'package:chucker_flutter/src/view/chucker_page.dart';
@@ -83,20 +82,15 @@ class ChuckerUiHelper {
     SharedPreferencesManager.getInstance().getSettings();
     ChuckerFlutter.navigatorObserver.navigator!.push(
       MaterialPageRoute(
-        builder: (context) => MaterialApp(
-          key: const Key('chucker_material_app'),
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: Localization.localizationsDelegates,
-          supportedLocales: Localization.supportedLocales,
-          locale: Localization.currentLocale,
-          theme: ThemeData(
+        builder: (context) => Theme(
+          data: ThemeData(
             tabBarTheme: TabBarTheme(
               labelColor: Colors.white,
               labelStyle: context.textTheme.bodyText1,
             ),
             backgroundColor: primaryColor,
           ),
-          home: const ChuckerPage(),
+          child: const ChuckerPage(),
         ),
       ),
     );
